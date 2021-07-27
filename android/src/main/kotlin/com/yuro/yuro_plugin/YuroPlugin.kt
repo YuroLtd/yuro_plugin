@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.NonNull
 import com.yuro.yuro_plugin.src.AppPlugin
+import com.yuro.yuro_plugin.src.ConvertPlugin
 import com.yuro.yuro_plugin.util.ErrorCode
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -24,8 +25,8 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
 
         private var eventSink: EventChannel.EventSink? = null
 
-        fun sendSuccessEventSink(type: String, data: Map<String, Any>) {
-            eventSink?.success(mapOf("type" to type, "data" to data))
+        fun sendSuccessEventSink(type: String, businessId: Int, data: Map<String, Any>) {
+            eventSink?.success(mapOf("type" to type, "businessId" to businessId, "data" to data))
         }
 
         fun sendErrorEventSink(error: ErrorCode) {
@@ -84,7 +85,7 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
         Log.d(TAG, "onMethodCall: ${call.method},${call.arguments}")
         when (call.method) {
             "installApk" -> AppPlugin.installApk(activity, call)
-
+            "convertHeif" -> ConvertPlugin.convertHeif(call, result)
             else -> result.notImplemented()
         }
     }
