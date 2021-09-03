@@ -16,16 +16,16 @@ object AppPlugin {
         val filePath = call.argument<String>("filePath")!!
         val apkFile = File(filePath)
         if (apkFile.isDirectory || !apkFile.exists()) {
-            YuroPlugin.sendErrorEventSink(ErrorCode.APK_NOT_EXISTS)
+            YuroPlugin.sendError(ErrorCode.APK_NOT_EXISTS)
             return
         }
         if (!apkFile.path.endsWith(".apk")) {
-            YuroPlugin.sendErrorEventSink(ErrorCode.NOT_APK_FILE)
+            YuroPlugin.sendError(ErrorCode.NOT_APK_FILE)
             return
         }
         val fileMd5 = call.argument<String>("fileMd5")!!
         if (apkFile.md5() != fileMd5) {
-            YuroPlugin.sendErrorEventSink(ErrorCode.APK_MD5_NOT_MATCH)
+            YuroPlugin.sendError(ErrorCode.APK_MD5_NOT_MATCH)
             return
         }
         activity?.let {

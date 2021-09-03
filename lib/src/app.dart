@@ -4,14 +4,6 @@ import 'plugin.dart';
 class AppPlugin extends BasePlugin {
   AppPlugin() : super('app');
 
-  @override
-  void handlerData(Map<String, dynamic> data) {}
-
-  @override
-  void handlerErr(err) {
-    print(err);
-  }
-
   /// 安装Apk
   ///
   /// @param filePath apk路径

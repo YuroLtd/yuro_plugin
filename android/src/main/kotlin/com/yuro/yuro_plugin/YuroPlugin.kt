@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.annotation.NonNull
 import com.yuro.yuro_plugin.src.AppPlugin
 import com.yuro.yuro_plugin.src.ConvertPlugin
+import com.yuro.yuro_plugin.src.LubanPlugin
+import com.yuro.yuro_plugin.util.BusinessId
 import com.yuro.yuro_plugin.util.ErrorCode
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -25,12 +27,12 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
 
         private var eventSink: EventChannel.EventSink? = null
 
-        fun sendSuccessEventSink(type: String, businessId: Int, data: Map<String, Any>) {
-            eventSink?.success(mapOf("type" to type, "businessId" to businessId, "data" to data))
+        fun sendSuccess(type: String, businessId: BusinessId, data: Any? = null) {
+            eventSink?.success(mapOf("type" to type, "businessId" to businessId.ordinal, "data" to data))
         }
 
-        fun sendErrorEventSink(error: ErrorCode) {
-            eventSink?.error(error.ordinal.toString(), error.name, null)
+        fun sendError(error: ErrorCode, message: String? = null, e: Throwable? = null) {
+            eventSink?.error(error.ordinal.toString(), message ?: error.name, e)
         }
     }
 

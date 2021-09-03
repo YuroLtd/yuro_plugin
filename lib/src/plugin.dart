@@ -1,20 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 const MethodChannel methodChannel = const MethodChannel('plugin.yuro.com/method');
 const EventChannel eventChannel = const EventChannel('plugin.yuro.com/event');
 
 abstract class BasePlugin {
-  void handlerData(Map<String, dynamic> data);
+  @protected
+  void handlerData(int businessId, dynamic data) {}
 
-  void handlerErr(err);
+  @protected
+  void handlerErr(err) {}
 
   BasePlugin(String type) {
-    eventChannel
-        .receiveBroadcastStream()
-        .asBroadcastStream()
-        .map((event) => Map<String, dynamic>.from(event)..deepCast())
-        .where((event) => event['type'] == type)
-        .listen((data) => handlerData(Map<String, dynamic>.from(data['data'])), onError: handlerErr);
+    eventChannel.receiveBroadcastStream().asBroadcastStream().where((event) => event['type'] == type).listen(
+          (data) => handlerData(data['businessId'], data['data']),
+          onError: handlerErr,
+        );
   }
 }
 
