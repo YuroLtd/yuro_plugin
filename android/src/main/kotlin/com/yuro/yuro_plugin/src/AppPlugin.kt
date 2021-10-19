@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.provider.Settings
 import com.yuro.yuro_plugin.YuroPlugin
 import com.yuro.yuro_plugin.util.ErrorCode
 import com.yuro.yuro_plugin.util.getUri
 import com.yuro.yuro_plugin.util.md5
 import io.flutter.plugin.common.MethodCall
+import io.flutter.plugin.common.MethodChannel
 import java.io.File
 
 object AppPlugin {
@@ -41,5 +43,9 @@ object AppPlugin {
         }
     }
 
+    fun androidId(context: Context, result: MethodChannel.Result) {
+        val androidId = Settings.System.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+        result.success(androidId)
+    }
 
 }

@@ -1,4 +1,3 @@
-
 import 'plugin.dart';
 
 class AppPlugin extends BasePlugin {
@@ -10,7 +9,12 @@ class AppPlugin extends BasePlugin {
   ///
   /// @param fileMd5 apk文件的md5值
   void installApk(String filePath, String fileMd5) async {
-    assert(filePath.isNotEmpty && fileMd5.isNotEmpty);
+    if (filePath.isEmpty || fileMd5.isEmpty) return;
     await methodChannel.invokeMethod('installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+  }
+
+  /// 获取AndroidId
+  Future<String?> androidId() async {
+    return await methodChannel.invokeMethod<String>('androidId');
   }
 }

@@ -30,13 +30,13 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
         }
 
         fun sendError(error: ErrorCode, message: String? = null, e: Throwable? = null) {
-            eventSink?.error(error.ordinal.toString(), message ?: error.name, e)
+            eventSink?.error(error.value.toString(), message ?: error.name, e)
         }
     }
 
     private lateinit var methodChannel: MethodChannel
     private lateinit var eventChannel: EventChannel
-    private var activity: Activity? = null
+    private lateinit var activity: Activity
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         Log.d(TAG, "onAttachedToEngine")
@@ -78,13 +78,15 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
     }
 
     override fun onDetachedFromActivity() {
-        activity = null
+
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         Log.d(TAG, "onMethodCall: ${call.method},${call.arguments}")
         when (call.method) {
             "installApk" -> AppPlugin.installApk(activity, call)
+            "androidId" -> AppPlugin.androidId(activity, result)
+            //
             "convertHeif" -> ConvertPlugin.convertHeif(call, result)
             else -> result.notImplemented()
         }
