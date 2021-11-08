@@ -1,4 +1,4 @@
-package com.yuro.yuro_plugin.src
+package com.yuro.plugin.src
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -7,7 +7,7 @@ import io.flutter.plugin.common.MethodChannel
 import java.io.File
 import java.io.FileOutputStream
 
-object ConvertPlugin {
+class ConvertPlugin {
     fun convertHeif(call: MethodCall, result: MethodChannel.Result) {
         try {
             val heifPath = call.arguments as String

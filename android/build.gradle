@@ -1,4 +1,4 @@
-group 'com.yuro.yuro_plugin'
+group 'com.yuro.plugin'
 version '1.0-SNAPSHOT'
 
 buildscript {

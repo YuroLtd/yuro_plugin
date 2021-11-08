@@ -1,19 +1,20 @@
-package com.yuro.yuro_plugin.src
+package com.yuro.plugin.src
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import com.yuro.yuro_plugin.YuroPlugin
-import com.yuro.yuro_plugin.util.ErrorCode
-import com.yuro.yuro_plugin.util.getUri
-import com.yuro.yuro_plugin.util.md5
+import android.webkit.WebView
+import com.yuro.plugin.YuroPlugin
+import com.yuro.plugin.util.ErrorCode
+import com.yuro.plugin.util.getUri
+import com.yuro.plugin.util.md5
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 
-object AppPlugin {
+class AppPlugin {
     fun installApk(activity: Activity?, call: MethodCall) {
         val filePath = call.argument<String>("filePath")!!
         val apkFile = File(filePath)
@@ -48,4 +49,8 @@ object AppPlugin {
         result.success(androidId)
     }
 
+    fun userAgent(context: Context, result: MethodChannel.Result) {
+        val agentStr = WebView(context).settings.userAgentString
+        result.success(agentStr)
+    }
 }

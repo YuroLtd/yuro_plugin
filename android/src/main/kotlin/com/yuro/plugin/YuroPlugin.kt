@@ -1,12 +1,12 @@
-package com.yuro.yuro_plugin
+package com.yuro.plugin
 
 import android.app.Activity
 import android.util.Log
 import androidx.annotation.NonNull
-import com.yuro.yuro_plugin.src.AppPlugin
-import com.yuro.yuro_plugin.src.ConvertPlugin
-import com.yuro.yuro_plugin.util.BusinessId
-import com.yuro.yuro_plugin.util.ErrorCode
+import com.yuro.plugin.src.AppPlugin
+import com.yuro.plugin.src.ConvertPlugin
+import com.yuro.plugin.util.BusinessId
+import com.yuro.plugin.util.ErrorCode
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -84,10 +84,11 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         Log.d(TAG, "onMethodCall: ${call.method},${call.arguments}")
         when (call.method) {
-            "installApk" -> AppPlugin.installApk(activity, call)
-            "androidId" -> AppPlugin.androidId(activity, result)
+            "app/installApk" -> AppPlugin().installApk(activity, call)
+            "app/androidId" -> AppPlugin().androidId(activity, result)
+            "app/userAgent" -> AppPlugin().userAgent(activity, result)
             //
-            "convertHeif" -> ConvertPlugin.convertHeif(call, result)
+            "convert/heif" -> ConvertPlugin().convertHeif(call, result)
             else -> result.notImplemented()
         }
     }

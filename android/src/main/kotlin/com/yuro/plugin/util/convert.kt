@@ -1,4 +1,4 @@
-package com.yuro.yuro_plugin.util
+package com.yuro.plugin.util
 
 import android.content.Context
 import android.content.Intent
