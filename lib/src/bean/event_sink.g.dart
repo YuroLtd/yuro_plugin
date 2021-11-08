@@ -47,6 +47,6 @@ K _$enumDecode<K, V>(
 }
 
 const _$TidEnumMap = {
-  Tid.app: 'app',
-  Tid.convert: 'convert',
+  Tid.APP: 'APP',
+  Tid.CONVERT: 'CONVERT',
 };

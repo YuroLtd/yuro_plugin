@@ -5,8 +5,9 @@ import android.util.Log
 import androidx.annotation.NonNull
 import com.yuro.plugin.src.AppPlugin
 import com.yuro.plugin.src.ConvertPlugin
-import com.yuro.plugin.util.BusinessId
+import com.yuro.plugin.util.Bid
 import com.yuro.plugin.util.ErrorCode
+import com.yuro.plugin.util.Tid
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -25,8 +26,8 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
 
         private var eventSink: EventChannel.EventSink? = null
 
-        fun sendSuccess(type: String, businessId: BusinessId, data: Any? = null) {
-            eventSink?.success(mapOf("type" to type, "businessId" to businessId.ordinal, "data" to data))
+        fun sendSuccess(tid: Tid, bid: Bid, data: Any? = null) {
+            eventSink?.success(mapOf("tid" to tid.name, "bid" to bid.value, "data" to data))
         }
 
         fun sendError(error: ErrorCode, message: String? = null, e: Throwable? = null) {
@@ -84,9 +85,8 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         Log.d(TAG, "onMethodCall: ${call.method},${call.arguments}")
         when (call.method) {
+            "app/appInfo" -> AppPlugin().appInfo(activity, result)
             "app/installApk" -> AppPlugin().installApk(activity, call)
-            "app/androidId" -> AppPlugin().androidId(activity, result)
-            "app/userAgent" -> AppPlugin().userAgent(activity, result)
             //
             "convert/heif" -> ConvertPlugin().convertHeif(call, result)
             else -> result.notImplemented()

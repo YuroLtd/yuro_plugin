@@ -7,6 +7,8 @@ import 'src/bean/bean.dart';
 import 'src/plus/plus.dart';
 import 'src/util/map_ext.dart';
 
+export 'src/bean/bean.dart' show AppInfo;
+
 class YuroPlugin {
   static const _METHOD_CHANNEL = 'plugin.yuro.com/method';
   static const _EVENT_CHANNEL = 'plugin.yuro.com/event';
@@ -36,7 +38,7 @@ class YuroPlugin {
 
   void _onError(err) => debugPrint(err);
 
-  AppPlugin get app => _plugMap.putIfAbsent(Tid.app, () => AppPlugin()) as AppPlugin;
+  AppPlugin get app => _plugMap.putIfAbsent(Tid.APP, () => AppPlugin()) as AppPlugin;
 
-  ConvertPlugin get convert => _plugMap.putIfAbsent(Tid.convert, () => ConvertPlugin()) as ConvertPlugin;
+  ConvertPlugin get convert => _plugMap.putIfAbsent(Tid.CONVERT, () => ConvertPlugin()) as ConvertPlugin;
 }

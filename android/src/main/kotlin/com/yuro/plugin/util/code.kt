@@ -1,6 +1,20 @@
 package com.yuro.plugin.util
 
-enum class BusinessId(val value: Int)
+enum class Tid {
+    /**
+     * App相关
+     */
+    APP,
+
+    /**
+     * 转换相关
+     */
+    CONVERT,
+}
+
+enum class Bid(val value: Int) {
+
+}
 
 
 enum class ErrorCode(val value: Int) {
