@@ -1,4 +1,3 @@
-
 import 'package:yuro_plugin/src/bean/bean.dart';
 import 'package:yuro_plugin/yuro_plugin.dart';
 
@@ -10,7 +9,7 @@ class AppPlugin extends Plus {
 
   /// 获取AppInfo
   Future<AppInfo> appInfo() async {
-    final srcJson = await YuroPlugin.methodChannel.invokeMethod('app/appInfo');
+    final srcJson = await methodChannel.invokeMethod('app/appInfo');
     return AppInfo.fromJson(Map.from(srcJson!));
   }
 
@@ -20,6 +19,6 @@ class AppPlugin extends Plus {
   /// + [fileMd5] apk文件的md5值
   void installApk(String filePath, String fileMd5) async {
     if (filePath.isEmpty || fileMd5.isEmpty) return;
-    await YuroPlugin.methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+    await methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
   }
 }

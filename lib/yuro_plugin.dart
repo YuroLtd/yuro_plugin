@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yuro_plugin/src/plus/app.dart';
 import 'package:yuro_plugin/src/plus/convert.dart';
 
@@ -10,17 +9,11 @@ import 'src/util/map_ext.dart';
 export 'src/bean/bean.dart' show AppInfo;
 
 class YuroPlugin {
-  static const _METHOD_CHANNEL = 'plugin.yuro.com/method';
-  static const _EVENT_CHANNEL = 'plugin.yuro.com/event';
-
-  static const MethodChannel methodChannel = const MethodChannel(_METHOD_CHANNEL);
-  static const EventChannel _eventChannel = const EventChannel(_EVENT_CHANNEL);
-
   static YuroPlugin? _yuroPlugin;
   static Map<Tid, Plus> _plugMap = {};
 
   YuroPlugin._() {
-    _eventChannel
+    eventChannel
         .receiveBroadcastStream()
         .asBroadcastStream()
         .map<Map<String, dynamic>>((event) => Map<String, dynamic>.from(event))
