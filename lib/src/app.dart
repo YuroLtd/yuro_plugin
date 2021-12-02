@@ -1,6 +1,6 @@
-import 'package:yuro_plugin/src/bean/bean.dart';
-import 'package:yuro_plugin/yuro_plugin.dart';
+import 'dart:io';
 
+import 'bean/bean.dart';
 import 'plus.dart';
 
 class AppPlugin extends Plus {
@@ -13,12 +13,14 @@ class AppPlugin extends Plus {
     return AppInfo.fromJson(Map.from(srcJson!));
   }
 
-  /// 安装Apk
+  /// 安装Apk(Only Android)
   ///
   /// + [filePath] apk路径
   /// + [fileMd5] apk文件的md5值
   void installApk(String filePath, String fileMd5) async {
-    if (filePath.isEmpty || fileMd5.isEmpty) return;
-    await methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+    if (Platform.isAndroid) {
+      if (filePath.isEmpty || fileMd5.isEmpty) return;
+      await methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+    }
   }
 }

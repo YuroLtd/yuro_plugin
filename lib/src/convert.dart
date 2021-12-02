@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:yuro_plugin/src/util/string.dart';
-
 import 'plus.dart';
 
 class ConvertPlugin extends Plus {
@@ -12,7 +10,7 @@ class ConvertPlugin extends Plus {
   ///
   /// + [heifPath] HEIF文件路径
   FutureOr<String?> convertHeif(String heifPath) async {
-    if (heifPath.isNullOrBlank()) return heifPath;
+    if (heifPath.trim().isEmpty) return heifPath;
     if (heifPath.endsWith('.HEIC') || heifPath.endsWith('.heic')) {
       return await methodChannel.invokeMethod('convert/heif', heifPath);
     } else {
