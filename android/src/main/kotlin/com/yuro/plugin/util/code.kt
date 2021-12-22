@@ -4,12 +4,12 @@ enum class Tid {
     /**
      * App相关
      */
-    APP,
+    app,
 
     /**
      * 转换相关
      */
-    CONVERT,
+    convert,
 }
 
 enum class Bid(val value: Int) {

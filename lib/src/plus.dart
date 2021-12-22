@@ -1,10 +1,7 @@
 import 'package:flutter/services.dart';
 
-const _METHOD_CHANNEL = 'plugin.yuro.com/method';
-const _EVENT_CHANNEL = 'plugin.yuro.com/event';
-
-const MethodChannel methodChannel = MethodChannel(_METHOD_CHANNEL);
-const EventChannel eventChannel = EventChannel(_EVENT_CHANNEL);
+const MethodChannel methodChannel = MethodChannel('plugin.yuro.com/method');
+const EventChannel eventChannel = EventChannel('plugin.yuro.com/event');
 
 abstract class Plus {
   void handlerData(int bid, dynamic data);

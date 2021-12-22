@@ -10,7 +10,7 @@ export 'src/bean/bean.dart' show AppInfo;
 
 class YuroPlugin {
   static YuroPlugin? _yuroPlugin;
-  static Map<Tid, Plus> _plugMap = {};
+  static final Map<Tid, Plus> _plugMap = {};
 
   YuroPlugin._() {
     eventChannel
@@ -31,7 +31,7 @@ class YuroPlugin {
 
   void _onError(err) => debugPrint(err);
 
-  AppPlugin get app => _plugMap.putIfAbsent(Tid.APP, () => AppPlugin()) as AppPlugin;
+  AppPlugin get app => _plugMap.putIfAbsent(Tid.app, () => AppPlugin()) as AppPlugin;
 
-  ConvertPlugin get convert => _plugMap.putIfAbsent(Tid.CONVERT, () => ConvertPlugin()) as ConvertPlugin;
+  ConvertPlugin get convert => _plugMap.putIfAbsent(Tid.convert, () => ConvertPlugin()) as ConvertPlugin;
 }

@@ -1,8 +1,8 @@
 /// 插件分类id
 enum Tid {
   /// 系统插件
-  APP,
+  app,
 
   /// 转换插件
-  CONVERT
+  convert
 }
