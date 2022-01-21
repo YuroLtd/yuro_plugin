@@ -7,7 +7,7 @@ import io.flutter.plugin.common.MethodChannel
 import java.io.File
 import java.io.FileOutputStream
 
-class ConvertPlugin {
+object ConvertPlugin {
     fun convertHeif(call: MethodCall, result: MethodChannel.Result) {
         try {
             val heifPath = call.arguments as String

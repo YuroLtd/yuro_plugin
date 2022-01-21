@@ -16,7 +16,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 
-class AppPlugin {
+object AppPlugin {
     fun appInfo(context: Context, result: MethodChannel.Result) {
         val map = mutableMapOf<String, Any>()
 

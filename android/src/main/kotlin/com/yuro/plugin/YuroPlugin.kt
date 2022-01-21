@@ -85,10 +85,10 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler, EventChannel
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
         Log.d(TAG, "onMethodCall: ${call.method},${call.arguments}")
         when (call.method) {
-            "app/appInfo" -> AppPlugin().appInfo(activity, result)
-            "app/installApk" -> AppPlugin().installApk(activity, call)
+            "app/appInfo" -> AppPlugin.appInfo(activity, result)
+            "app/installApk" -> AppPlugin.installApk(activity, call)
             //
-            "convert/heif" -> ConvertPlugin().convertHeif(call, result)
+            "convert/heif" -> ConvertPlugin.convertHeif(call, result)
             else -> result.notImplemented()
         }
     }
