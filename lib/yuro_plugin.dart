@@ -28,11 +28,21 @@ class YuroPlugin {
   ///
   /// + [filePath] apk路径
   /// + [fileMd5] apk文件的md5值
-  void installApk(String filePath, String fileMd5) async {
+  ///
+  /// return:
+  /// + APK_MD5_NOT_MATCH md5校验失败
+  /// + APK_NOT_EXISTS 安装文件不存在
+  /// + FILE_TYPE_ERROR 文件类型错误
+  Future<String?> installApk(String filePath, String fileMd5) async {
+    assert(filePath.isNotEmpty && fileMd5.isNotEmpty);
     if (Platform.isAndroid) {
-      if (filePath.isEmpty || fileMd5.isEmpty) return;
-      await _methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+      try {
+        await _methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+      } on PlatformException catch (err) {
+        return err.code;
+      }
     }
+    return null;
   }
 
   /// HEIF转为JPG

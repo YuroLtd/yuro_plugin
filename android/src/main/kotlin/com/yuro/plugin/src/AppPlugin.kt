@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.provider.Settings
 import android.webkit.WebView
-import com.yuro.plugin.YuroPlugin
 import com.yuro.plugin.util.getUri
 import com.yuro.plugin.util.md5
 import io.flutter.plugin.common.MethodCall
@@ -32,7 +31,7 @@ object AppPlugin {
     }
 
     fun installApk(activity: Activity?, call: MethodCall, result: MethodChannel.Result) {
-        val filePath = call.argument<String>("filePath")!!
+        val filePath = call.argument<String>("filePath") ?: ""
         val apkFile = File(filePath)
         if (apkFile.isDirectory || !apkFile.exists()) {
             result.error("APK_NOT_EXISTS", "Apk文件不存在: $filePath", null)
@@ -42,7 +41,7 @@ object AppPlugin {
             result.error("FILE_TYPE_ERROR", "APK文件类型错误: ${apkFile.name}", null)
             return
         }
-        val fileMd5 = call.argument<String>("fileMd5")!!
+        val fileMd5 = call.argument<String>("fileMd5")
         if (apkFile.md5() != fileMd5) {
             result.error("APK_MD5_NOT_MATCH", "Apk的Md5不匹配,请重新下载", null);
             return
