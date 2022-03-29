@@ -43,7 +43,7 @@ fun File.md5(): String {
 
 fun File.getUri(context: Context): Uri {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        FileProvider.getUriForFile(context, context.packageName, this)
+        FileProvider.getUriForFile(context, "${context.packageName}.fileProvider", this)
     } else {
         Uri.fromFile(this)
     }

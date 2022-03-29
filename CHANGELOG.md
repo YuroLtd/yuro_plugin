@@ -1,3 +1,7 @@
+## 0.0.2
+
+* 修复FileProvider授权错误导致无法获取Uri
+
 ## 0.0.1
 
 * first upload
