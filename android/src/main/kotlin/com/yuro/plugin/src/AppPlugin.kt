@@ -32,20 +32,21 @@ object AppPlugin {
         result.success(map)
     }
 
-    fun installApk(activity: Activity?, call: MethodCall) {
+    fun installApk(activity: Activity?, call: MethodCall, result: MethodChannel.Result) {
         val filePath = call.argument<String>("filePath")!!
         val apkFile = File(filePath)
         if (apkFile.isDirectory || !apkFile.exists()) {
-            YuroPlugin.sendError(ErrorCode.APK_NOT_EXISTS)
+            result.error("APK_NOT_EXISTS", "Apk文件不存在: $filePath", null)
             return
         }
         if (!apkFile.path.endsWith(".apk")) {
-            YuroPlugin.sendError(ErrorCode.NOT_APK_FILE)
+            result.error("FILE_TYPE_ERROR", "APK文件类型错误: ${apkFile.name}", null)
             return
         }
         val fileMd5 = call.argument<String>("fileMd5")!!
         if (apkFile.md5() != fileMd5) {
             YuroPlugin.sendError(ErrorCode.APK_MD5_NOT_MATCH)
+            result.error("APK_MD5_NOT_MATCH", "Apk的Md5不匹配,请重新下载", null);
             return
         }
         activity?.let {

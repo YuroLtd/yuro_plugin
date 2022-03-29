@@ -1,37 +1,49 @@
-import 'package:flutter/material.dart';
-import 'package:yuro_plugin/src/app.dart';
-import 'package:yuro_plugin/src/convert.dart';
+import 'dart:async';
+import 'dart:io';
 
-import 'src/bean/bean.dart';
-import 'src/plus.dart';
-import 'src/util/map_ext.dart';
+import 'package:flutter/services.dart';
 
-export 'src/bean/bean.dart' show AppInfo;
+import 'src/bean/app_info.dart';
+
+export 'src/bean/app_info.dart' show AppInfo;
 
 class YuroPlugin {
-  static YuroPlugin? _yuroPlugin;
-  static final Map<Tid, Plus> _plugMap = {};
+  static const MethodChannel _methodChannel = MethodChannel('plugin.yuro.com/method');
 
-  YuroPlugin._() {
-    eventChannel
-        .receiveBroadcastStream()
-        .asBroadcastStream()
-        .map<Map<String, dynamic>>((event) => Map<String, dynamic>.from(event))
-        .listen(_onData, onError: _onError);
-  }
+// static const EventChannel _eventChannel = EventChannel('plugin.yuro.com/event');
+
+  static YuroPlugin? _yuroPlugin;
 
   factory YuroPlugin() => _yuroPlugin ??= YuroPlugin._();
 
-  void _onData(Map<String, dynamic> event) {
-    final eventSink = EventSink.fromJson(event);
-    _plugMap.where((k, v) => k == eventSink.tid).forEach((key, value) {
-      value.handlerData(eventSink.bid, eventSink.data);
-    });
+  YuroPlugin._();
+
+  /// 获取AppInfo
+  Future<AppInfo> appInfo() async {
+    final srcJson = await _methodChannel.invokeMethod('app/appInfo');
+    return AppInfo.fromJson(Map.from(srcJson!));
   }
 
-  void _onError(err) => debugPrint(err);
+  /// 安装Apk(Only Android)
+  ///
+  /// + [filePath] apk路径
+  /// + [fileMd5] apk文件的md5值
+  void installApk(String filePath, String fileMd5) async {
+    if (Platform.isAndroid) {
+      if (filePath.isEmpty || fileMd5.isEmpty) return;
+      await _methodChannel.invokeMethod('app/installApk', {'filePath': filePath, 'fileMd5': fileMd5});
+    }
+  }
 
-  AppPlugin get app => _plugMap.putIfAbsent(Tid.app, () => AppPlugin()) as AppPlugin;
-
-  ConvertPlugin get convert => _plugMap.putIfAbsent(Tid.convert, () => ConvertPlugin()) as ConvertPlugin;
+  /// HEIF转为JPG
+  ///
+  /// + [heifPath] HEIF文件路径
+  FutureOr<String?> convertHeif(String heifPath) async {
+    if (heifPath.trim().isEmpty) return heifPath;
+    if (heifPath.endsWith('.HEIC') || heifPath.endsWith('.heic')) {
+      return await _methodChannel.invokeMethod('convert/heif', heifPath);
+    } else {
+      return heifPath;
+    }
+  }
 }
