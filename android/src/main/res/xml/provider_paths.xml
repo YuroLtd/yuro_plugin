@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-files-path
-        name="external-files-path"
-        path="." />
-    <external-cache-path
-        name="external-cache-path"
-        path="." />
+    <!-- /data/data/<package_name>/files -->
+    <files-path name="files-path" path="." />
+
+    <!-- /data/data/<package_name>/cache -->
+    <cache-path name="cache-path" path="." />
+
+    <!-- /storage/emulated/0 -->
+    <external-path name="external-path" path="." />
+
+    <!-- /storage/emulated/0/Android/data/<package_name>/files-->
+    <external-files-path name="external-files-path" path="." />
+
+    <!-- /storage/emulated/0/Android/data/<package_name>/cache-->
+    <external-cache-path name="external-cache-path" path="." />
 </paths>
