@@ -7,6 +7,7 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import com.yuro.yuro_plugin.plugins.Network
+import com.yuro.yuro_plugin.plugins.System
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -14,8 +15,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-
-import com.yuro.yuro_plugin.plugins.System
 
 /** YuroPlugin */
 class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
@@ -68,8 +67,9 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
 
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
-            "system/installApk" -> System.installApk(activity, call)
+            "system/installApk" -> activity?.let { System.installApk(it, call) }
             "system/deviceInfo" -> System.deviceInfo(context, result)
+            "system/recordLog" -> System.recordLog(context, result)
             else -> result.notImplemented()
         }
     }

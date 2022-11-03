@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:yuro_plugin/yuro_plugin.dart';
@@ -19,10 +17,10 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
   final _networkStatusListeners = <NetworkStatusListener>[];
 
   Future<dynamic> _methodCall(MethodCall call) async {
-    debugPrint('${call.method}=>${call.arguments}');
     switch (call.method) {
       case 'networkStatus':
-        final status = NetworkStatus.fromJson(Map<String,dynamic>.from(call.arguments));
+        final status = NetworkStatus.fromJson(Map<String, dynamic>.from(call.arguments));
+        if (_networkStatus == status) return;
         void forEach(NetworkStatusListener listener) => listener.call(status);
         _networkStatusListeners.forEach(forEach);
         _networkStatus = status;
@@ -53,4 +51,7 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
 
   @override
   NetworkStatus? getNetworkStatus() => _networkStatus;
+
+  @override
+  Future<String?> recordLog() async => await methodChannel.invokeMethod('system/recordLog');
 }

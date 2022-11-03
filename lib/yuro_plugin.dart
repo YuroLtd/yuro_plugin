@@ -10,7 +10,6 @@ import 'src/util/exception.dart';
 export 'src/bean/device_info.dart';
 export 'src/bean/network_status.dart';
 
-
 abstract class YuroPlugin extends PlatformInterface {
   static final Object _token = Object();
 
@@ -61,6 +60,11 @@ abstract class YuroPlugin extends PlatformInterface {
 
   /// 注销网络状态监听
   void unregisterNetworkListener(NetworkStatusListener listener) {
+    throw MissingPluginImplementException(Platform.operatingSystem);
+  }
+
+  /// 记录应用日志, 返回日志保存路径
+  Future<String?> recordLog() {
     throw MissingPluginImplementException(Platform.operatingSystem);
   }
 }

@@ -6,7 +6,6 @@ import android.net.Network
 import android.os.Build
 import com.yuro.yuro_plugin.YuroPlugin
 import kotlin.concurrent.thread
-import kotlin.coroutines.suspendCoroutine
 
 object Network {
     private lateinit var connectivityManager: ConnectivityManager

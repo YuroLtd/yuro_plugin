@@ -13,6 +13,7 @@ dependencies:
   plugin_platform_interface: ^2.0.2
   json_annotation: ^4.7.0
   collection: ^1.16.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:

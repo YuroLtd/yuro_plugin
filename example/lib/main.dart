@@ -37,9 +37,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void deviceInfo() async{
-   final info = await YuroPlugin.instance.deviceInfo();
-   debugPrint(info.toJson().toString());
+  void deviceInfo() async {
+    final info = await YuroPlugin.instance.deviceInfo();
+    debugPrint(info.toJson().toString());
   }
 
   @override
@@ -47,6 +47,9 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(title: const Text('Yuro plugin example')),
       body: Column(children: [
         Text('${networkStatus?.type.desc} || ${networkStatus?.linkAddress.join(' || ') ?? ''}'),
-        ElevatedButton(onPressed: deviceInfo, child: const Text('deviceInfo')),
+        Wrap(children: [
+          ElevatedButton(onPressed: deviceInfo, child: const Text('deviceInfo')),
+          ElevatedButton(onPressed: ()=>YuroPlugin.instance.recordLog(), child: const Text('startLog')),
+        ])
       ]));
 }

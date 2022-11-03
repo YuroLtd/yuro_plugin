@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'network_status.g.dart';
@@ -24,7 +25,7 @@ enum NetworkType {
 typedef NetworkStatusListener = void Function(NetworkStatus status);
 
 @JsonSerializable()
-class NetworkStatus extends Object {
+class NetworkStatus extends Object with EquatableMixin {
   @JsonKey(name: 'type')
   final NetworkType type;
 
@@ -39,4 +40,7 @@ class NetworkStatus extends Object {
   factory NetworkStatus.fromJson(Map<String, dynamic> srcJson) => _$NetworkStatusFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$NetworkStatusToJson(this);
+
+  @override
+  List<Object?> get props => [type, linkAddress];
 }
