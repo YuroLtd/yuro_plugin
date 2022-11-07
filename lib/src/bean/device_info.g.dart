@@ -21,30 +21,40 @@ DeviceInfoAndroid _$DeviceInfoAndroidFromJson(Map<String, dynamic> json) =>
     DeviceInfoAndroid(
       json['brand'] as String,
       json['model'] as String,
-      json['android'] as String,
+      json['sdk'] as String,
       json['abis'] as String,
-      json['fingerprint'] as String,
       json['userAgent'] as String,
       json['userAgent2'] as String,
       json['packageName'] as String,
       json['androidId'] as String,
       json['isRoot'] as bool,
       (json['linkAddress'] as List<dynamic>).map((e) => e as String).toList(),
-      json['networkType'] as int,
+      $enumDecode(_$NetworkTypeEnumMap, json['networkType']),
     );
 
 Map<String, dynamic> _$DeviceInfoAndroidToJson(DeviceInfoAndroid instance) =>
     <String, dynamic>{
       'brand': instance.brand,
       'model': instance.model,
-      'android': instance.android,
+      'sdk': instance.sdk,
       'abis': instance.abis,
-      'fingerprint': instance.fingerprint,
       'userAgent': instance.userAgent,
       'userAgent2': instance.userAgent2,
       'packageName': instance.packageName,
       'androidId': instance.androidId,
       'isRoot': instance.isRoot,
       'linkAddress': instance.linkAddress,
-      'networkType': instance.networkType,
+      'networkType': _$NetworkTypeEnumMap[instance.networkType]!,
     };
+
+const _$NetworkTypeEnumMap = {
+  NetworkType.cellular: 0,
+  NetworkType.wifi: 1,
+  NetworkType.bluetooth: 2,
+  NetworkType.ethernet: 3,
+  NetworkType.vpn: 4,
+  NetworkType.wifiAware: 5,
+  NetworkType.lowpan: 6,
+  NetworkType.usb: 8,
+  NetworkType.none: -1,
+};

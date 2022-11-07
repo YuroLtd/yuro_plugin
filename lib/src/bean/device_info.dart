@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'network_status.dart';
+
 part 'device_info.g.dart';
 
 @JsonSerializable(explicitToJson:true)
@@ -24,14 +26,11 @@ class DeviceInfoAndroid extends Object {
   @JsonKey(name: 'model')
   final String model;
 
-  @JsonKey(name: 'android')
-  final String android;
+  @JsonKey(name: 'sdk')
+  final String sdk;
 
   @JsonKey(name: 'abis')
   final String abis;
-
-  @JsonKey(name: 'fingerprint')
-  final String fingerprint;
 
   @JsonKey(name: 'userAgent')
   final String userAgent;
@@ -52,14 +51,13 @@ class DeviceInfoAndroid extends Object {
   final List<String> linkAddress;
 
   @JsonKey(name: 'networkType')
-  final int networkType;
+  final NetworkType networkType;
 
   DeviceInfoAndroid(
     this.brand,
     this.model,
-    this.android,
+    this.sdk,
     this.abis,
-    this.fingerprint,
     this.userAgent,
     this.userAgent2,
     this.packageName,

@@ -23,7 +23,7 @@ object System {
         val file = File(context.externalCacheDir, "$fileName.log")
         val getLog = arrayOf("logcat", "-d", "-f", file.absolutePath)
         Runtime.getRuntime().exec(getLog)
-        Runtime.getRuntime().exec(arrayOf("logcat", "-c"))
+//        Runtime.getRuntime().exec(arrayOf("logcat", "-c"))
         result.success(file.absolutePath)
     }
 
@@ -46,11 +46,9 @@ object System {
             // 型号
             "model" to Build.MODEL,
             // Android 版本
-            "android" to "Android ${Build.VERSION.RELEASE}, level ${Build.VERSION.SDK_INT}",
+            "sdk" to "Android ${Build.VERSION.RELEASE}, level ${Build.VERSION.SDK_INT}",
             // ABIS
             "abis" to Build.SUPPORTED_ABIS.joinToString(),
-            // 设备签名信息
-            "fingerprint" to Build.FINGERPRINT,
             // user-agent
             "userAgent" to java.lang.System.getProperty("http.agent"),
             // WebView user-agent
