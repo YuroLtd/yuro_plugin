@@ -14,7 +14,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-object System {
+object SystemPlugin {
     /**
      * 保存日志缓存
      */
@@ -49,7 +49,7 @@ object System {
             // ABIS
             "abis" to Build.SUPPORTED_ABIS.joinToString(),
             // user-agent
-            "userAgent" to java.lang.System.getProperty("http.agent"),
+            "userAgent" to System.getProperty("http.agent"),
             // WebView user-agent
             "userAgent2" to WebSettings.getDefaultUserAgent(context),
             // 应用包名
@@ -59,9 +59,9 @@ object System {
             // 是否获取root权限
             "isRoot" to isRoot(),
             // 网络连接地址
-            "linkAddress" to Network.linkAddress,
+            "linkAddress" to NetworkPlugin.linkAddress,
             // 网络连接类型
-            "networkType" to Network.networkType.code,
+            "networkType" to NetworkPlugin.networkType.code,
         )
         result.success(map)
     }

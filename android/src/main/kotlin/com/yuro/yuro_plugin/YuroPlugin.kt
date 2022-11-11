@@ -6,8 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Log
-import com.yuro.yuro_plugin.plugins.Network
-import com.yuro.yuro_plugin.plugins.System
+import com.yuro.yuro_plugin.plugins.NetworkPlugin
+import com.yuro.yuro_plugin.plugins.SystemPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -15,7 +15,6 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import kotlin.math.log
 
 /** YuroPlugin */
 class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
@@ -39,7 +38,7 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
         context = flutterPluginBinding.applicationContext
         handler = MyHandler(channel)
 
-        Network.registerNetworkCallback(context)
+        NetworkPlugin.registerNetworkCallback(context)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
@@ -47,7 +46,7 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
         channel.setMethodCallHandler(null)
         handler = null
 
-        Network.unregisterNetworkCallback()
+        NetworkPlugin.unregisterNetworkCallback()
     }
 
     override fun onAttachedToActivity(p0: ActivityPluginBinding) {
@@ -69,9 +68,9 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     override fun onMethodCall(call: MethodCall, result: Result) {
         Log.d("YuroPlugin", "onMethodCall: ${call.method}")
         when (call.method) {
-            "system/installApk" -> activity?.let { System.installApk(it, call) }
-            "system/deviceInfo" -> System.deviceInfo(context, result)
-            "system/recordLog" -> System.recordLog(context, result)
+            "system/installApk" -> activity?.let { SystemPlugin.installApk(it, call) }
+            "system/deviceInfo" -> SystemPlugin.deviceInfo(context, result)
+            "system/recordLog" -> SystemPlugin.recordLog(context, result)
             else -> result.notImplemented()
         }
     }

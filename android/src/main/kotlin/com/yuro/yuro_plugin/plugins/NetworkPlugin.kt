@@ -7,7 +7,7 @@ import android.os.Build
 import com.yuro.yuro_plugin.YuroPlugin
 import kotlin.concurrent.thread
 
-object Network {
+object NetworkPlugin {
     private lateinit var connectivityManager: ConnectivityManager
     var networkType = NetworkType.NONE
     var linkAddress = listOf<String>()
