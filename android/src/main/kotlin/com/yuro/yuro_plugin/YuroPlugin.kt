@@ -15,6 +15,7 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
+import kotlin.math.log
 
 /** YuroPlugin */
 class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
@@ -66,6 +67,7 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
     }
 
     override fun onMethodCall(call: MethodCall, result: Result) {
+        Log.d("YuroPlugin", "onMethodCall: ${call.method}")
         when (call.method) {
             "system/installApk" -> activity?.let { System.installApk(it, call) }
             "system/deviceInfo" -> System.deviceInfo(context, result)

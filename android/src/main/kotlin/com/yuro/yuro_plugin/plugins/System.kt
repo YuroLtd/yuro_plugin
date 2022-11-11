@@ -23,7 +23,6 @@ object System {
         val file = File(context.externalCacheDir, "$fileName.log")
         val getLog = arrayOf("logcat", "-d", "-f", file.absolutePath)
         Runtime.getRuntime().exec(getLog)
-//        Runtime.getRuntime().exec(arrayOf("logcat", "-c"))
         result.success(file.absolutePath)
     }
 
@@ -73,18 +72,15 @@ object System {
      */
     fun installApk(activity: Activity, call: MethodCall) {
         val filePath = call.arguments<String>()!!
-        val apkFileUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            FileProvider.getUriForFile(activity, "${activity.packageName}.fileProvider", File(filePath))
-        } else {
-            Uri.fromFile(File(filePath))
-        }
         val intent = Intent(Intent.ACTION_VIEW).apply {
-            flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                FileProvider.getUriForFile(activity, "${activity.packageName}.fileProvider", File(filePath))
             } else {
-                Intent.FLAG_ACTIVITY_NEW_TASK
+                Uri.fromFile(File(filePath))
             }
-            setDataAndType(apkFileUri, "application/vnd.android.package-archive")
+            setDataAndType(uri, "application/vnd.android.package-archive")
         }
         activity.startActivity(intent)
     }
