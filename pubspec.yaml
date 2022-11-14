@@ -1,7 +1,7 @@
 name: yuro_plugin
 description: A new Flutter project.
 version: 0.1.0+2
-homepage: https://github.com/YuroLtd/yuro_kit.git
+homepage: https://github.com/YuroLtd/yuro_plugin
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
