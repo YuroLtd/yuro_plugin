@@ -36,6 +36,11 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
   }
 
   @override
+  Future<String?> getFileMd5(String filePath) async{
+    return await methodChannel.invokeMethod('util/getFileMd5', filePath);
+  }
+
+  @override
   Future<DeviceInfo> deviceInfo() async {
     final result = await methodChannel.invokeMethod('system/deviceInfo');
     final deviceInfo = DeviceInfo();

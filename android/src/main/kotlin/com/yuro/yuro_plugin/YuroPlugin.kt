@@ -8,6 +8,7 @@ import android.os.Message
 import android.util.Log
 import com.yuro.yuro_plugin.plugins.NetworkPlugin
 import com.yuro.yuro_plugin.plugins.SystemPlugin
+import com.yuro.yuro_plugin.plugins.UtilPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -71,6 +72,7 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
             "system/installApk" -> activity?.let { SystemPlugin.installApk(it, call) }
             "system/deviceInfo" -> SystemPlugin.deviceInfo(context, result)
             "system/recordLog" -> SystemPlugin.recordLog(context, result)
+            "util/getFileMd5" -> UtilPlugin.getFileMd5(call, result)
             else -> result.notImplemented()
         }
     }

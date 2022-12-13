@@ -43,6 +43,10 @@ abstract class YuroPlugin extends PlatformInterface {
     throw UnsupportedError('installApk() is no supported on ${Platform.operatingSystem}');
   }
 
+  Future<String?> getFileMd5(String filePath) async {
+    throw MissingPluginImplementException(Platform.operatingSystem);
+  }
+
   /// 获取设备信息
   Future<DeviceInfo> deviceInfo() {
     throw MissingPluginImplementException(Platform.operatingSystem);
