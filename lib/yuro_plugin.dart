@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:yuro_plugin/src/yuro_plugin_platform_android.dart';
 
 import 'src/bean/device_info.dart';
 import 'src/bean/network_status.dart';
@@ -9,6 +8,8 @@ import 'src/util/exception.dart';
 
 export 'src/bean/device_info.dart';
 export 'src/bean/network_status.dart';
+
+import 'src/yuro_plugin_platform_android.dart';
 
 abstract class YuroPlugin extends PlatformInterface {
   static final Object _token = Object();

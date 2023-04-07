@@ -12,7 +12,7 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
   }
 
   @visibleForTesting
-  final methodChannel = const MethodChannel('plugins.yuro.com/yuro_android');
+  final methodChannel = const MethodChannel('com.yuro.plugin/android');
   NetworkStatus? _networkStatus;
   final _networkStatusListeners = <NetworkStatusListener>[];
 
@@ -44,7 +44,7 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
   Future<DeviceInfo> deviceInfo() async {
     final result = await methodChannel.invokeMethod('system/deviceInfo');
     final deviceInfo = DeviceInfo();
-    if (result != null) deviceInfo.android = DeviceInfoAndroid.fromJson(Map<String, dynamic>.from(result));
+    if (result != null) deviceInfo.android = AndroidInfo.fromJson(Map<String, dynamic>.from(result));
     return deviceInfo;
   }
 

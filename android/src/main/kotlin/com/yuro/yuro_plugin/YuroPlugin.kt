@@ -33,7 +33,7 @@ class YuroPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         Log.d("YuroPlugin", "onAttachedToEngine")
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "plugins.yuro.com/yuro_android")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.yuro.plugin/android")
         channel.setMethodCallHandler(this)
 
         context = flutterPluginBinding.applicationContext

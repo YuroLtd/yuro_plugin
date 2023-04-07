@@ -9,7 +9,7 @@ part of 'device_info.dart';
 DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => DeviceInfo(
       android: json['android'] == null
           ? null
-          : DeviceInfoAndroid.fromJson(json['android'] as Map<String, dynamic>),
+          : AndroidInfo.fromJson(json['android'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) =>
@@ -17,8 +17,8 @@ Map<String, dynamic> _$DeviceInfoToJson(DeviceInfo instance) =>
       'android': instance.android?.toJson(),
     };
 
-DeviceInfoAndroid _$DeviceInfoAndroidFromJson(Map<String, dynamic> json) =>
-    DeviceInfoAndroid(
+AndroidInfo _$AndroidInfoFromJson(Map<String, dynamic> json) =>
+    AndroidInfo(
       json['brand'] as String,
       json['model'] as String,
       json['sdk'] as String,
@@ -32,7 +32,7 @@ DeviceInfoAndroid _$DeviceInfoAndroidFromJson(Map<String, dynamic> json) =>
       $enumDecode(_$NetworkTypeEnumMap, json['networkType']),
     );
 
-Map<String, dynamic> _$DeviceInfoAndroidToJson(DeviceInfoAndroid instance) =>
+Map<String, dynamic> _$AndroidInfoToJson(AndroidInfo instance) =>
     <String, dynamic>{
       'brand': instance.brand,
       'model': instance.model,

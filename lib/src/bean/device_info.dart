@@ -7,7 +7,7 @@ part 'device_info.g.dart';
 @JsonSerializable(explicitToJson:true)
 class DeviceInfo extends Object {
   @JsonKey(name: 'android')
-  DeviceInfoAndroid? android;
+  AndroidInfo? android;
 
   DeviceInfo({
     this.android,
@@ -19,7 +19,7 @@ class DeviceInfo extends Object {
 }
 
 @JsonSerializable()
-class DeviceInfoAndroid extends Object {
+class AndroidInfo extends Object {
   @JsonKey(name: 'brand')
   final String brand;
 
@@ -53,7 +53,7 @@ class DeviceInfoAndroid extends Object {
   @JsonKey(name: 'networkType')
   final NetworkType networkType;
 
-  DeviceInfoAndroid(
+  AndroidInfo(
     this.brand,
     this.model,
     this.sdk,
@@ -67,7 +67,7 @@ class DeviceInfoAndroid extends Object {
     this.networkType,
   );
 
-  factory DeviceInfoAndroid.fromJson(Map<String, dynamic> srcJson) => _$DeviceInfoAndroidFromJson(srcJson);
+  factory AndroidInfo.fromJson(Map<String, dynamic> srcJson) => _$AndroidInfoFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$DeviceInfoAndroidToJson(this);
+  Map<String, dynamic> toJson() => _$AndroidInfoToJson(this);
 }
