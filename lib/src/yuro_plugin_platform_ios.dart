@@ -21,7 +21,6 @@ class YuroPluginPlatformIos extends YuroPlugin {
   @override
   Future<DeviceInfo> deviceInfo() async {
     final result = await methodChannel.invokeMethod('system/deviceInfo');
-    print(result);
     final deviceInfo = DeviceInfo();
     if (result != null) deviceInfo.ios = IosInfo.fromJson(Map<String, dynamic>.from(result));
     return deviceInfo;
