@@ -10,6 +10,7 @@ export 'src/bean/device_info.dart';
 export 'src/bean/network_status.dart';
 
 import 'src/yuro_plugin_platform_android.dart';
+import 'src/yuro_plugin_platform_ios.dart';
 
 abstract class YuroPlugin extends PlatformInterface {
   static final Object _token = Object();
@@ -20,7 +21,8 @@ abstract class YuroPlugin extends PlatformInterface {
     if (_instance == null) {
       if (Platform.isAndroid) {
         YuroPluginPlatformAndroid.registerWith();
-        // } else if (Platform.isIOS) {
+      } else if (Platform.isIOS) {
+        YuroPluginPlatformIos.registerWith();
         // } else if (Platform.isWindows) {
         // } else if (Platform.isMacOS) {
         // } else if (Platform.isLinux) {

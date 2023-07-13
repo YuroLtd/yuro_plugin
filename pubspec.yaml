@@ -29,4 +29,5 @@ flutter:
       android:
         package: com.yuro.yuro_plugin
         pluginClass: YuroPlugin
-
+      ios:
+        pluginClass: YuroPlugin
