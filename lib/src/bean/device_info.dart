@@ -33,6 +33,15 @@ extension DeviceInfoExt on DeviceInfo {
     }
     return null;
   }
+
+  String? get packageName{
+     if (Platform.isAndroid) {
+      return android?.packageName;
+    } else if (Platform.isIOS) {
+      return ios?.packageName;
+    }
+    return null;
+  }
 }
 
 @JsonSerializable()
