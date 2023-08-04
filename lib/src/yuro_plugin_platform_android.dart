@@ -13,22 +13,8 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
 
   @visibleForTesting
   final methodChannel = const MethodChannel('com.yuro.plugin/android');
-  NetworkStatus? _networkStatus;
-  final _networkStatusListeners = <NetworkStatusListener>[];
 
-  Future<dynamic> _methodCall(MethodCall call) async {
-    switch (call.method) {
-      case 'networkStatus':
-        final status = NetworkStatus.fromJson(Map<String, dynamic>.from(call.arguments));
-        if (_networkStatus == status) return;
-        void forEach(NetworkStatusListener listener) => listener.call(status);
-        _networkStatusListeners.forEach(forEach);
-        _networkStatus = status;
-        break;
-      default:
-        break;
-    }
-  }
+  Future<dynamic> _methodCall(MethodCall call) async {}
 
   @override
   void installApk(String filePath) async {
@@ -36,7 +22,10 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
   }
 
   @override
-  Future<String?> getFileMd5(String filePath) async{
+  Future<String?> recordLog() async => await methodChannel.invokeMethod('system/recordLog');
+
+  @override
+  Future<String?> getFileMd5(String filePath) async {
     return await methodChannel.invokeMethod('util/getFileMd5', filePath);
   }
 
@@ -47,16 +36,4 @@ class YuroPluginPlatformAndroid extends YuroPlugin {
     if (result != null) deviceInfo.android = AndroidInfo.fromJson(Map<String, dynamic>.from(result));
     return deviceInfo;
   }
-
-  @override
-  void registerNetworkListener(NetworkStatusListener listener) => _networkStatusListeners.add(listener);
-
-  @override
-  void unregisterNetworkListener(NetworkStatusListener listener) => _networkStatusListeners.remove(listener);
-
-  @override
-  NetworkStatus? getNetworkStatus() => _networkStatus;
-
-  @override
-  Future<String?> recordLog() async => await methodChannel.invokeMethod('system/recordLog');
 }

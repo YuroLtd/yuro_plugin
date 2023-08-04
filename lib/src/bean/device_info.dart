@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'network_status.dart';
-
 part 'device_info.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -114,9 +112,6 @@ class AndroidInfo extends Object {
   @JsonKey(name: 'linkAddress')
   final List<String> linkAddress;
 
-  @JsonKey(name: 'networkType')
-  final NetworkType networkType;
-
   AndroidInfo(
     this.brand,
     this.model,
@@ -128,7 +123,6 @@ class AndroidInfo extends Object {
     this.androidId,
     this.isRoot,
     this.linkAddress,
-    this.networkType,
   );
 
   factory AndroidInfo.fromJson(Map<String, dynamic> srcJson) => _$AndroidInfoFromJson(srcJson);

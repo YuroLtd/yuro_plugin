@@ -1,6 +1,6 @@
 name: yuro_plugin
 description: A new Flutter project.
-version: 0.1.0+2
+version: 0.2.0
 homepage: https://github.com/YuroLtd/yuro_plugin
 
 environment:
@@ -10,17 +10,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
+  plugin_platform_interface: ^2.1.5
   json_annotation: ^4.8.1
   collection: ^1.17.0
   equatable: ^2.0.3
+
+dependency_overrides:
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  json_serializable: ^6.5.4
-  build_runner: ^2.3.2
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
 
 flutter:
 

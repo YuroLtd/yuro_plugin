@@ -52,7 +52,6 @@ AndroidInfo _$AndroidInfoFromJson(Map<String, dynamic> json) => AndroidInfo(
       json['androidId'] as String,
       json['isRoot'] as bool,
       (json['linkAddress'] as List<dynamic>).map((e) => e as String).toList(),
-      $enumDecode(_$NetworkTypeEnumMap, json['networkType']),
     );
 
 Map<String, dynamic> _$AndroidInfoToJson(AndroidInfo instance) =>
@@ -67,17 +66,4 @@ Map<String, dynamic> _$AndroidInfoToJson(AndroidInfo instance) =>
       'androidId': instance.androidId,
       'isRoot': instance.isRoot,
       'linkAddress': instance.linkAddress,
-      'networkType': _$NetworkTypeEnumMap[instance.networkType]!,
     };
-
-const _$NetworkTypeEnumMap = {
-  NetworkType.cellular: 0,
-  NetworkType.wifi: 1,
-  NetworkType.bluetooth: 2,
-  NetworkType.ethernet: 3,
-  NetworkType.vpn: 4,
-  NetworkType.wifiAware: 5,
-  NetworkType.lowpan: 6,
-  NetworkType.usb: 8,
-  NetworkType.none: -1,
-};

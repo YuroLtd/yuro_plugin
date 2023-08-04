@@ -3,14 +3,12 @@ import 'dart:io';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 import 'src/bean/device_info.dart';
-import 'src/bean/network_status.dart';
 import 'src/util/exception.dart';
-
-export 'src/bean/device_info.dart';
-export 'src/bean/network_status.dart';
 
 import 'src/yuro_plugin_platform_android.dart';
 import 'src/yuro_plugin_platform_ios.dart';
+
+export 'src/bean/device_info.dart';
 
 abstract class YuroPlugin extends PlatformInterface {
   static final Object _token = Object();
@@ -46,32 +44,18 @@ abstract class YuroPlugin extends PlatformInterface {
     throw UnsupportedError('installApk() is no supported on ${Platform.operatingSystem}');
   }
 
+  /// 记录应用日志(Only Android), 返回日志保存路径
+  Future<String?> recordLog() {
+    throw MissingPluginImplementException(Platform.operatingSystem);
+  }
+
+  /// 获取文件的md5
   Future<String?> getFileMd5(String filePath) async {
     throw MissingPluginImplementException(Platform.operatingSystem);
   }
 
   /// 获取设备信息
   Future<DeviceInfo> deviceInfo() {
-    throw MissingPluginImplementException(Platform.operatingSystem);
-  }
-
-  /// 获取当前网络状态
-  NetworkStatus? getNetworkStatus() {
-    throw MissingPluginImplementException(Platform.operatingSystem);
-  }
-
-  /// 注册网络状态监听
-  void registerNetworkListener(NetworkStatusListener listener) {
-    throw MissingPluginImplementException(Platform.operatingSystem);
-  }
-
-  /// 注销网络状态监听
-  void unregisterNetworkListener(NetworkStatusListener listener) {
-    throw MissingPluginImplementException(Platform.operatingSystem);
-  }
-
-  /// 记录应用日志, 返回日志保存路径
-  Future<String?> recordLog() {
     throw MissingPluginImplementException(Platform.operatingSystem);
   }
 }
