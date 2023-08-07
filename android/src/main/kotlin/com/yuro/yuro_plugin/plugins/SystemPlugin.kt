@@ -58,10 +58,6 @@ object SystemPlugin {
             "androidId" to Settings.System.getString(context.contentResolver, Settings.Secure.ANDROID_ID),
             // 是否获取root权限
             "isRoot" to isRoot(),
-            // 网络连接地址
-            "linkAddress" to NetworkPlugin.linkAddress,
-            // 网络连接类型
-            "networkType" to NetworkPlugin.networkType.code,
         )
         result.success(map)
     }

@@ -51,7 +51,6 @@ AndroidInfo _$AndroidInfoFromJson(Map<String, dynamic> json) => AndroidInfo(
       json['packageName'] as String,
       json['androidId'] as String,
       json['isRoot'] as bool,
-      (json['linkAddress'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$AndroidInfoToJson(AndroidInfo instance) =>
@@ -65,5 +64,4 @@ Map<String, dynamic> _$AndroidInfoToJson(AndroidInfo instance) =>
       'packageName': instance.packageName,
       'androidId': instance.androidId,
       'isRoot': instance.isRoot,
-      'linkAddress': instance.linkAddress,
     };

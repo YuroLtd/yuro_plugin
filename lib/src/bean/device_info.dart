@@ -109,9 +109,6 @@ class AndroidInfo extends Object {
   @JsonKey(name: 'isRoot')
   final bool isRoot;
 
-  @JsonKey(name: 'linkAddress')
-  final List<String> linkAddress;
-
   AndroidInfo(
     this.brand,
     this.model,
@@ -122,7 +119,6 @@ class AndroidInfo extends Object {
     this.packageName,
     this.androidId,
     this.isRoot,
-    this.linkAddress,
   );
 
   factory AndroidInfo.fromJson(Map<String, dynamic> srcJson) => _$AndroidInfoFromJson(srcJson);
